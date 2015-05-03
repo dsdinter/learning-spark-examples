@@ -100,7 +100,8 @@ object ChapterSixExample {
     println(contactsContactLists.collect().toList)
     // Computer the distance of each call using an external R program
     // adds our script to a list of files for each node to download with this job
-    val distScript = "./src/R/finddistance.R"
+    val pwd = System.getProperty("user.dir")
+    val distScript = pwd + "/src/R/finddistance.R"
     val distScriptName = "finddistance.R"
     sc.addFile(distScript)
     val pipeInputs = contactsContactLists.values.flatMap(x => x.map(y =>
@@ -146,7 +147,7 @@ object ChapterSixExample {
   }
 
   def createMapper() = {
-    val mapper = new ObjectMapper with ScalaObjectMapper
+    val mapper = new ObjectMapper()
     mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
     mapper.registerModule(DefaultScalaModule)
     mapper

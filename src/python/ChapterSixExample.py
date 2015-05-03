@@ -6,6 +6,7 @@ import sys
 import urllib3
 import json
 import math
+import os
 
 from pyspark import SparkContext
 from pyspark import SparkFiles
@@ -123,7 +124,7 @@ def fetchCallSigns(input):
 contactsContactList = fetchCallSigns(validSigns)
 
 # Compute the distance of each call using an external R program
-distScript = "./src/R/finddistance.R"
+distScript = os.getcwd()+"/src/R/finddistance.R"
 distScriptName = "finddistance.R"
 sc.addFile(distScript)
 
